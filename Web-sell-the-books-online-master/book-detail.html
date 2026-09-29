@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chi tiết sách</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="book-detail.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <header>
+      <div class="container header">
+        <div class="header-left">
+          <div class="logo">
+            <div class="logo-icon">B</div>
+            <h2>BookStore</h2>
+          </div>
+
+          <input
+            class="search"
+            id="searchInput"
+            placeholder="Tìm kiếm sách..."
+          />
+        </div>
+
+        <nav class="main-nav">
+          <a href="index.html">Trang chủ</a>
+
+          <div class="dropdown">
+            <a href="index.html#productSection">Danh mục ▼</a>
+
+            <div class="dropdown-content">
+              <a href="index.html">Tất cả sách</a>
+              <a href="index.html">Kỹ Năng Sống</a>
+              <a href="index.html">Tiểu Thuyết</a>
+              <a href="index.html">Kinh Doanh</a>
+              <a href="index.html">Khoa Học</a>
+            </div>
+          </div>
+
+          <a href="index.html#sale">Khuyến mãi</a>
+          <a href="#">Liên hệ</a>
+        </nav>
+
+        <div class="icons header-actions">
+          <div id="guestMenu" class="user-menu">
+            <button onclick="window.location.href = 'index.html'">
+              👤 Đăng nhập
+            </button>
+          </div>
+
+          <div id="userMenu" class="user-menu" style="display: none">
+            <span id="helloUser"></span>
+
+            <button onclick="logout()" title="Đăng xuất">Thoát</button>
+          </div>
+
+          <button onclick="addWishlist(currentBook.name)" title="Yêu thích">
+            ❤️
+          </button>
+
+          <button onclick="toggleDarkMode()" title="Đổi giao diện">🌙</button>
+
+          <a href="#" class="admin-btn" title="Quản trị" onclick="goToAdmin(event)">⚙️</a>
+
+          <button onclick="window.location.href='cart.html'" title="Giỏ hàng">
+            🛒 (<span id="cartCount">0</span>)
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- DETAIL -->
+    <section class="detail-page">
+      <div class="container detail-wrap">
+        <!-- IMAGE -->
+        <div class="detail-image">
+          <img id="detailImage" />
+        </div>
+
+        <!-- INFO -->
+        <div class="detail-content">
+          <h1 id="detailName"></h1>
+
+          <p class="detail-author">
+            Tác giả:
+            <span id="detailAuthor"></span>
+          </p>
+
+          <p class="detail-publisher">
+            Nhà xuất bản:
+            <span id="detailPublisher"></span>
+          </p>
+
+          <div class="detail-rating">
+            ★ 5.0
+
+            <span>(234 đánh giá)</span>
+          </div>
+
+          <h2 id="detailPrice"></h2>
+
+          <p id="detailDesc"></p>
+
+          <p class="sold">Đã bán 1.2k</p>
+          <div class="detail-benefits">
+            <div>✅ Còn hàng</div>
+            <div>🚚 Miễn phí vận chuyển từ 199.000đ</div>
+            <div>🔁 Đổi trả trong 7 ngày</div>
+            <div>📚 Cam kết sách chính hãng</div>
+          </div>
+
+          <!-- BUTTON -->
+          <div class="detail-buttons">
+            <button id="addCartBtn" class="add-cart-btn">Thêm vào giỏ</button>
+            <button id="buyNowBtn" class="buy-now-btn">Mua ngay</button>
+            <button id="wishBtn">❤️ Yêu thích</button>
+          </div>
+          <!-- PRODUCT INFO -->
+          <div class="product-info-box">
+            <h3>Thông tin chi tiết</h3>
+
+            <table>
+              <tr>
+                <td>Tác giả</td>
+                <td id="infoAuthor"></td>
+              </tr>
+
+              <tr>
+                <td>Nhà xuất bản</td>
+                <td id="infoPublisher"></td>
+              </tr>
+
+              <tr>
+                <td>Ngôn ngữ</td>
+                <td>Tiếng Việt</td>
+              </tr>
+
+              <tr>
+                <td>Hình thức</td>
+                <td>Bìa mềm</td>
+              </tr>
+
+              <tr>
+                <td>Danh mục</td>
+                <td>Sách</td>
+              </tr>
+            </table>
+          </div>
+          <!-- REVIEW -->
+          <div class="review-box">
+            <div class="rating-summary">
+              ⭐
+              <span class="avg-rating">0</span>/5 (
+              <span class="review-count">0</span>
+              đánh giá )
+            </div>
+
+            <div class="stars">
+              <span onclick="selectRating(this, 1)">☆</span>
+
+              <span onclick="selectRating(this, 2)">☆</span>
+
+              <span onclick="selectRating(this, 3)">☆</span>
+
+              <span onclick="selectRating(this, 4)">☆</span>
+
+              <span onclick="selectRating(this, 5)">☆</span>
+            </div>
+
+            <input class="review-name" placeholder="Tên của bạn" />
+
+            <textarea
+              class="comment-input"
+              placeholder="Viết đánh giá..."
+            ></textarea>
+
+            <button onclick="addReview(this)">Gửi đánh giá</button>
+
+            <div class="comment-list"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CART -->
+    <div class="modal" id="cartModal">
+      <div class="modal-content">
+        <h2>Giỏ hàng</h2>
+
+        <div id="cartItems"></div>
+
+        <!-- VOUCHER -->
+        <div class="voucher-box">
+          <h3>Mã giảm giá</h3>
+
+          <button onclick="showVoucher()">Chọn mã giảm giá</button>
+
+          <input type="text" id="voucherInput" placeholder="Nhập mã giảm giá" />
+
+          <button onclick="applyVoucher()">Áp dụng</button>
+
+          <div id="voucherList" style="display: none">
+            <div class="voucher-item" onclick="selectVoucher('SALE10')">
+              SALE10 - Giảm 10%
+            </div>
+
+            <div class="voucher-item" onclick="selectVoucher('SALE20')">
+              SALE20 - Giảm 20%
+            </div>
+            <div class="voucher-item" onclick="selectVoucher('FREESHIP')">
+              FREESHIP - Miễn phí vận chuyển
+            </div>
+          </div>
+        </div>
+        <div class="shipping-info">
+          <h3>Thông tin giao hàng</h3>
+
+          <input
+            type="text"
+            id="customerPhone"
+            placeholder="Nhập số điện thoại"
+          />
+
+          <input
+            type="text"
+            id="customerAddress"
+            placeholder="Nhập địa chỉ nhận hàng"
+          />
+
+          <select id="paymentMethod">
+            <option value="COD">Thanh toán khi nhận hàng</option>
+            <option value="BANK">Chuyển khoản ngân hàng</option>
+          </select>
+        </div>
+        <p>Phí vận chuyển: <span id="shippingFee">30.000đ</span></p>
+        <p>Giảm giá: <span id="discountMoney">0đ</span></p>
+        <h3>
+          Tổng:
+          <span id="totalPrice">0</span>
+        </h3>
+
+        <button onclick="checkout()">Thanh toán</button>
+
+        <button onclick="closeCart()">Đóng</button>
+      </div>
+    </div>
+    
+    <script src="book-detail.js"></script>
+  </body>
+</html>

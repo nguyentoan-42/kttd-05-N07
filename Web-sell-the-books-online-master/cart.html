@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* ===== CART PAGE LAYOUT ===== */
+      .cart-page {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .cart-page h2 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      .cart-header-row {
+        display: grid;
+        grid-template-columns: 1fr 160px 160px 50px;
+        padding: 10px 16px;
+        font-weight: 600;
+        color: #555;
+        font-size: 14px;
+        border-bottom: 1px solid #e5e7eb;
+        margin-bottom: 8px;
+      }
+
+      .cart-item-row {
+        display: grid;
+        grid-template-columns: 1fr 160px 160px 50px;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 14px 16px;
+        margin-bottom: 12px;
+        gap: 10px;
+      }
+
+      .cart-item-info {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .cart-item-info input[type="checkbox"] {
+        width: 17px;
+        height: 17px;
+        cursor: pointer;
+        accent-color: #2563eb;
+      }
+
+      .cart-item-info img {
+        width: 68px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 8px;
+        border: 1px solid #e5e7eb;
+      }
+
+      .cart-item-name {
+        font-weight: 600;
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+
+      .cart-item-price {
+        color: #2563eb;
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .cart-qty {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .cart-qty button {
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 6px;
+        background: #2563eb;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+
+      .cart-qty button:hover { background: #1d4ed8; }
+
+      .cart-qty span {
+        font-weight: 600;
+        font-size: 15px;
+        min-width: 24px;
+        text-align: center;
+      }
+
+      .cart-delete-btn {
+        background: #fee2e2 !important;
+        color: #ef4444 !important;
+        border: none;
+        border-radius: 8px;
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+
+      .cart-delete-btn:hover { background: #fca5a5 !important; }
+
+      .cart-item-total-cell {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .cart-item-total-price {
+        font-weight: 700;
+        font-size: 15px;
+        color: #111;
+      }
+
+      /* ===== VOUCHER CARD ===== */
+      .voucher-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-top: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .voucher-left {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .voucher-title {
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 4px;
+      }
+
+      .voucher-desc {
+        font-size: 13px;
+        color: #888;
+      }
+
+      .voucher-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .show-voucher-btn {
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .show-voucher-btn:hover { background: #1d4ed8; }
+
+      .remove-voucher {
+        background: #ef4444;
+        color: #fff;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .remove-voucher:hover { background: #dc2626; }
+
+      /* ===== SUMMARY CARD ===== */
+      .summary-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 22px 24px;
+        margin-top: 16px;
+      }
+
+      .summary-card p {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #555;
+      }
+
+      .summary-card h2 {
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 14px 0 18px;
+        color: #111;
+        border-top: 1px solid #e5e7eb;
+        padding-top: 14px;
+      }
+
+      .checkout-btn {
+        width: 100%;
+        padding: 14px;
+        background: #ef4444;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .checkout-btn:hover { background: #dc2626; }
+
+      /* ===== VOUCHER MODAL ===== */
+      .voucher-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.45);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .voucher-content {
+        background: #fff;
+        border-radius: 16px;
+        padding: 28px 32px;
+        width: 420px;
+        max-width: 95vw;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      }
+
+      .voucher-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+
+      .voucher-top h2 { font-size: 18px; font-weight: 700; }
+
+      .voucher-top span {
+        font-size: 20px;
+        cursor: pointer;
+        color: #888;
+        transition: color 0.2s;
+      }
+
+      .voucher-top span:hover { color: #ef4444; }
+
+      .voucher-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .voucher-item {
+        border: 2px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 14px 16px;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+      }
+
+      .voucher-item:hover {
+        border-color: #2563eb;
+        background: #eff6ff;
+      }
+
+      .voucher-item h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+      .voucher-item p { font-size: 13px; color: #888; }
+
+      /* ===== EMPTY CART ===== */
+      .cart-empty {
+        text-align: center;
+        padding: 60px 20px;
+        color: #888;
+      }
+
+      .cart-empty p { font-size: 16px; margin-bottom: 16px; }
+      .cart-empty a {
+        display: inline-block;
+        padding: 10px 24px;
+        background: #2563eb;
+        color: #fff;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="container header">
+        <div class="header-left">
+          <div class="logo">
+            <div class="logo-icon">B</div>
+            <h2>BookStore</h2>
+          </div>
+          <input class="search" id="searchInput" placeholder="Tìm kiếm sách..." />
+        </div>
+
+        <nav class="main-nav">
+          <a href="index.html">Trang chủ</a>
+          <div class="dropdown">
+            <a href="index.html#productSection">Danh mục ▼</a>
+            <div class="dropdown-content">
+              <a href="index.html">Tất cả sách</a>
+              <a href="index.html">Kỹ Năng Sống</a>
+              <a href="index.html">Tiểu Thuyết</a>
+              <a href="index.html">Kinh Doanh</a>
+              <a href="index.html">Khoa Học</a>
+            </div>
+          </div>
+          <a href="index.html#sale">Khuyến mãi</a>
+          <a href="#">Liên hệ</a>
+        </nav>
+
+        <div class="icons header-actions">
+          <div id="guestMenu" class="user-menu">
+            <button onclick="window.location.href='index.html'">👤 Đăng nhập</button>
+          </div>
+
+        <div id="userMenu" class="user-menu" style="display:none;">
+          <span id="helloUser"></span>
+          <button onclick="logout()" title="Đăng xuất">Thoát</button>
+        </div>
+          <button title="Yêu thích">❤️</button>
+          <button onclick="toggleDarkMode()" title="Đổi giao diện">🌙</button>
+          <a href="#" class="admin-btn" title="Quản trị" onclick="goToAdmin(event)">⚙️</a>
+          <button onclick="window.location.href='cart.html'" title="Giỏ hàng">
+            🛒 (<span id="cartCount">0</span>)
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="cart-page">
+      <h2>Giỏ hàng của bạn</h2>
+
+      <!-- Header row -->
+      <div class="cart-header-row">
+        <div>Sản phẩm</div>
+        <div style="text-align:center">Số lượng</div>
+        <div style="text-align:right">Thành tiền</div>
+      </div>
+
+      <!-- Cart items -->
+      <div id="cartItems"></div>
+
+      <!-- Voucher -->
+      <div class="voucher-card">
+        <div class="voucher-left">
+          <span style="font-size:20px">🎟</span>
+          <div>
+            <div class="voucher-title">Khuyến mãi</div>
+            <div class="voucher-desc" id="selectedVoucher">Chưa chọn mã giảm giá</div>
+          </div>
+        </div>
+        <div class="voucher-actions">
+          <button class="remove-voucher" onclick="removeVoucher()">Bỏ mã</button>
+          <button class="show-voucher-btn" onclick="showVoucherList()">Chọn mã</button>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class="summary-card">
+        <div class="checkout-info">
+  <h2>Thông tin giao hàng</h2>
+
+  <input
+    type="text"
+    id="customerPhone"
+    placeholder="Số điện thoại người nhận"
+  />
+
+  <input
+    type="text"
+    id="customerAddress"
+    placeholder="Địa chỉ nhận hàng"
+  />
+
+  <select id="paymentMethod">
+    <option value="Thanh toán khi nhận hàng">
+      Thanh toán khi nhận hàng
+    </option>
+
+    <option value="Chuyển khoản ngân hàng">
+      Chuyển khoản ngân hàng
+    </option>
+
+    <option value="Ví điện tử">
+      Ví điện tử
+    </option>
+  </select>
+</div>
+        <p><span>Tạm tính:</span> <span id="subTotal">0đ</span></p>
+        <p><span>Phí vận chuyển:</span><span id="shippingFee">30,000đ</span></p>
+        <p><span>Giảm giá:</span> <span id="discount">-0đ</span></p>
+        <div class="summary-row">
+  <span>Ưu đãi hội viên</span>
+  <span id="memberDiscount">-0đ</span>
+</div>
+
+<div class="summary-row">
+  <span>Hạng hội viên</span>
+  <span id="memberInfo">👤 Thành viên thường - Ưu đãi hội viên: giảm 0%</span>
+</div>
+        <h2><span>Tổng tiền:</span> <span id="finalTotal">0đ</span></h2>
+        <button class="checkout-btn" onclick="checkout()">Thanh toán</button>
+      </div>
+    </div>
+
+    <!-- Voucher Modal -->
+    <div class="voucher-modal" id="voucherModal">
+      <div class="voucher-content">
+        <div class="voucher-top">
+          <h2>Chọn mã giảm giá</h2>
+          <span onclick="closeVoucher()">✖</span>
+        </div>
+        <div class="voucher-list">
+          <div class="voucher-item" onclick="selectVoucher('SALE10', 10)">
+            <h4>Giảm 10%</h4>
+            <p>Đơn từ 100.000đ</p>
+          </div>
+          <div class="voucher-item" onclick="selectVoucher('SALE20', 20)">
+            <h4>Giảm 20%</h4>
+            <p>Đơn từ 300.000đ</p>
+          </div>
+          <div class="voucher-item" onclick="selectVoucher('SALE30', 30)">
+            <h4>Giảm 30%</h4>
+            <p>Đơn từ 500.000đ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="cart.js"></script>
+  </body>
+</html>
