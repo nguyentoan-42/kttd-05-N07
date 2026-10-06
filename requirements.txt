@@ -1,12 +1,2 @@
-Yêu cầu
-- Python
-- Selenium
-- pytest
-- Google Chrome
-
-Thư viện
-- Selenium
-pip install selenium
-
-- pytest
-pip install -U pytest
+pytest
+selenium
