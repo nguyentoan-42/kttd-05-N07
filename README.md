@@ -5,3 +5,32 @@ Thành viên:
 - A52093	Nguyễn Trung Đức
 - A52197	Phạm Bảo Phúc
 - A51922	Đào Quang Khải
+
+## Thực hành tuần 4
+
+## Yêu cầu
+- Python
+- Selenium
+- pytest
+- Google Chrome
+
+## Thư viện
+- Selenium
+```bash
+pip install selenium
+```
+- pytest
+```bash
+pip install -U pytest
+```
+
+## Chạy kiểm thử
+Mở terminal tại thư mục chứa test_smoke.py và chạy
+```bash
+pytest
+```
+
+## Nội dung test
+Mở trang https://the-internet.herokuapp.com/ và kiểm tra tiêu đề trang có là “The Internet” không.
+
+## Kết quả
