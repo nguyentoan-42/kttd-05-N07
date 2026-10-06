@@ -1,5 +1,4 @@
-Nhóm: N07
-Thành viên:
+Nhóm N07
 - A51878	Nguyễn Tiến Toàn
 - A51709	Nguyễn Anh Tuấn
 - A52093	Nguyễn Trung Đức
