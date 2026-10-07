@@ -24,7 +24,7 @@ python -m venv .venv
 
 PowerShell
 pip install -r tuan-04/requirements.txt
-## 4. Cách chạy
+ 4. Cách chạy
 PowerShell
 pytest tuan-04/test_smoke.py -v
 ## 5. Nội dung kiểm thử
