@@ -1,12 +1,5 @@
-Yêu cầu
-- Python
-- Selenium
-- pytest
-- Google Chrome
-
-Thư viện
-- Selenium
-pip install selenium
-
-- pytest
-pip install -U pytest
+# Danh sach cac thu vien bat buộc cho kiem thu tu dong UI (Tuần 4)
+selenium>=4.18.0
+pytest>=8.0.0
+pytest-html>=4.1.1
+webdriver-manager>=4.0.1
