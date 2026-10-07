@@ -4,3 +4,5 @@ Nhóm N07
 - A52093	Nguyễn Trung Đức
 - A52197	Phạm Bảo Phúc
 - A51922	Đào Quang Khải
+
+Bài thực hành sẽ nằm trong folder tương ứng với mỗi tuần
