@@ -1,15 +1,18 @@
+
 # Byte-compiled / optimized / DLL files
+# ==========================================
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
+*.dll
+*.dylib
 
-# Distribution / packaging
-.Python
+# ==========================================
+# C extensions & Build artifacts
+# ==========================================
 build/
-develop-eggs/
+bdist.*/
 dist/
 downloads/
 eggs/
@@ -26,14 +29,10 @@ share/python-wheels/
 *.egg
 MANIFEST
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
-
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.nox/
+# ==========================================
+# Pytest & Coverage Reports
+# ==========================================
+.pytest_cache/
 .coverage
 .coverage.*
 .cache
@@ -42,10 +41,12 @@ coverage.xml
 *.cover
 *.py,cover
 .hypothesis/
-.pytest_cache/
-cover/
+htmlcov/
+pytestdebug.log
 
+# ==========================================
 # Virtual Environments
+# ==========================================
 .env
 .venv
 env/
@@ -53,9 +54,32 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+bin/
+include/
+share/
 
-# IDEs and Editors
+# ==========================================
+# IDEs & Code Editors Configuration
+# ==========================================
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# ==========================================
+# Operating System & Logs
+# ==========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.log
+geckodriver.log
+chromedriver.log
