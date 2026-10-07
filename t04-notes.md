@@ -1,25 +1,36 @@
-## GHI CHÚ - TUẦN 4
+# BÁO CÁO GHI CHÚ THU HOẠCH - TUẦN 04
 
-## Kiến thức
-Qua tuần 4, em đã tự cài được các thư viện cần thiết cho kiểm thử như Selenium và pytest.
-Đồng thời có thể tự chạy một chương trình kiểm thử cơ bản trên trình duyệt Chrome về kiểm tra tiêu đề trang.
-Hiểu được khi nào kết quả kiểm thử báo trượt (FAIL) hoặc đạt (PASS).
+## I. CÁC KIẾN THỨC ĐÃ TÍCH LŨY
+- Thành thạo thiết lập môi trường kiểm thử tự động Python kết hợp thư viện `selenium` và framework `pytest`.
+- Nắm vững quy trình khởi tạo và điều khiển trình duyệt tự động (Chrome) để tương tác trực tiếp với giao diện người dùng.
+- Hiểu rõ cơ chế đánh giá trạng thái kiểm thử (`PASS` khi mọi khẳng định `assert` đều đúng, `FAIL` khi có ít nhất một điều kiện vi phạm).
 
-## Câu hỏi của tuần
-**Một script Selenium gồm những bước nào, và mỗi bước ứng với dòng nào trong bài kiểm thử của bạn?**
-Một script Selenium cơ bản gồm 5 bước chính, ứng với các phần trong bài thực hành trong file test_smoke.py sẽ là:
-- Khởi tạo một phiên làm việc mới trên trình duyệt: `driver = webdriver.Chrome()`;
-- Điều hướng trình duyệt đến URL của trang web cần kiểm thử: `driver.get("https://the-internet.herokuapp.com/")`;
-- Tìm/lấy thông tin, thao tác trên trang web: `driver.title`;
-- Kiểm tra/xác thực kết quả: `assert driver.title == "The Internet"`;
-- Đóng trình duyệt: `driver.quit()`.
+---
 
-**pytest tự tìm bài kiểm thử dựa vào quy tắc đặt tên nào?**
-Các quy tắc đặt tên:
-- Tên file kiểm thử: phải bắt đầu bằng tiền tố `test_` hoặc kết thúc bằng hậu tố `_test.py`
-- Tên Class kiểm thử: phải bắt đầu bằng chữ `Test`. Đồng thời, các class này không được định nghĩa hàm khởi tạo `__init__`
-- Tên hàm/phương thức: phải bắt đầu bằng tiền tố `test_`
+## II. TRẢ LỜI CÂU HỎI 
 
-## Sử dụng AI
-- Cách viết script Selenium cơ bản => Em đã học được cấu trúc và tự viết được script cho bài kiểm thử đầu tiên.
-- Các quy tắt đặt tên của pytest => Có thể trả lời được câu hỏi trên và tránh để sau này bị dính phải lỗi này.
+### 1. Quy trình thực thi một script Selenium chuẩn
+Một kịch bản Selenium cơ bản bao gồm 5 bước cốt lõi. Trong bài `test_smoke.py`, các dòng code tương ứng được triển khai như sau:
+
+1. **Khởi tạo WebDriver:** Mở trình duyệt Chrome.
+   - Code: `driver = webdriver.Chrome()`
+2. **Điều hướng URL:** Truy cập vào trang web mục tiêu.
+   - Code: `driver.get("https://the-internet.herokuapp.com/")`
+3. **Trích xuất thông tin:** Lấy dữ liệu thực tế từ trang web (tiêu đề trang).
+   - Code: `driver.title`
+4. **Xác minh kết quả (Assertion):** So sánh giá trị thực tế với giá trị mong đợi.
+   - Code: `assert driver.title == "The Internet"`
+5. **Giải phóng tài nguyên (Teardown):** Đóng hoàn toàn trình duyệt sau khi kiểm thử xong.
+   - Code: `driver.quit()`
+
+### 2. Quy tắc tự động phát hiện bài test của Pytest (Test Discovery)
+Pytest dựa vào cách đặt tên file, class và hàm để tự động nhận diện kịch bản kiểm thử:
+- **Tên file:** Phải bắt đầu bằng `test_` (ví dụ: `test_smoke.py`) hoặc kết thúc bằng `_test.py`.
+- **Tên class (nếu có):** Bắt đầu bằng từ `Test` (viết hoa chữ T, không dùng hàm `__init__`).
+- **Tên hàm/method:** Bắt đầu bằng tiền tố `test_` (ví dụ: `def test_smoke():`).
+
+---
+
+## III. NHẬN XÉT VỀ VIỆC ỨNG DỤNG AI
+- **Tối ưu hóa mã nguồn:** Học cách viết code kiểm thử ngắn gọn, chính xác theo chuẩn của Selenium 4 và Pytest.
+- **Tránh lỗi hệ thống:** Hiểu rõ quy tắc đặt tên để Pytest không bị bỏ sót các file hoặc bài kiểm thử trong dự án nhóm.
