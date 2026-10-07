@@ -1,29 +1,36 @@
-## THỰC HÀNH - TUẦN 4
+# Tuần 4 – Smoke test với Pytest và Selenium
 
-## Yêu cầu
-- Python
-- Selenium
-- pytest
-- Google Chrome
 
-## Thư viện
-- Selenium
-```bash
-pip install selenium
-```
-- pytest
-```bash
-pip install -U pytest
-```
+**Mã SV:** A52197  
+ 
 
-## Chạy kiểm thử
-Mở terminal tại thư mục chứa test_smoke.py và chạy
-```bash
-pytest
-```
+---
 
-## Nội dung test
-Mở trang https://the-internet.herokuapp.com/ và kiểm tra tiêu đề trang có là “The Internet” không.
+## 1. Giới thiệu
+Bài kiểm thử Smoke Test sử dụng Selenium và Pytest để tự động kiểm tra tính sẵn sàng của trang web mục tiêu **The Internet**.
 
-## Kết quả
-<img width="1381" height="840" alt="Screenshot 2026-10-06 201337" src="https://github.com/user-attachments/assets/f32b7ca1-7819-4b77-a0e2-b07de7612754" />
+## 2. Yêu cầu
+- Python 3 và pip.
+- Trình duyệt Google Chrome (phiên bản mới nhất).
+
+## 3. Cách cài đặt Pytest và Selenium
+*Lưu ý: Phải kích hoạt môi trường ảo trước khi cài thư viện hoặc chạy pytest.*
+
+– **Tạo và kích hoạt môi trường ảo:**
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+– Cài thư viện từ file requirements:
+
+PowerShell
+pip install -r tuan-04/requirements.txt
+4. Cách chạy
+PowerShell
+pytest tuan-04/test_smoke.py -v
+5. Nội dung kiểm thử
+Dữ liệu đầu vào: https://the-internet.herokuapp.com/
+
+Kết quả mong đợi: Tiêu đề trang (title) hiển thị đúng là The Internet.
+
+6. Kết quả
+Ca kiểm thử đạt: 1 passed trong 34.98 giây (All assertions Passed).
