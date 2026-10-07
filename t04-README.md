@@ -1,8 +1,7 @@
 # Tuần 4 – Smoke test với Pytest và Selenium
 
-**Sinh viên thực hiện:** Nguyễn Bảo Phúc  
-**Mã SV:** A51738  
-**Lớp / Nhóm:** Kiểm thử phần mềm (N07)  
+
+**Mã SV:** A52197
 
 ---
 
