@@ -24,13 +24,13 @@ python -m venv .venv
 
 PowerShell
 pip install -r tuan-04/requirements.txt
-4. Cách chạy
+## 4. Cách chạy
 PowerShell
 pytest tuan-04/test_smoke.py -v
-5. Nội dung kiểm thử
+## 5. Nội dung kiểm thử
 Dữ liệu đầu vào: https://the-internet.herokuapp.com/
 
 Kết quả mong đợi: Tiêu đề trang (title) hiển thị đúng là The Internet.
 
-6. Kết quả
+## 6. Kết quả
 Ca kiểm thử đạt: 1 passed trong 34.98 giây (All assertions Passed).
