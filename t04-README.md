@@ -20,11 +20,13 @@ Bài kiểm tra Smoke Test sử dụng Selenium và Pytest để tự động ki
 ```powershell
 python -m venv .venv
 .venv\Scripts\Activate.ps1
+```
+
 – Cài thư viện từ file requirements:
 
 PowerShell
 pip install -r tuan-04/requirements.txt
- 4. Cách chạy
+## 4. Cách chạy
 PowerShell
 pytest tuan-04/test_smoke.py -v
 ## 5. Nội dung kiểm thử
