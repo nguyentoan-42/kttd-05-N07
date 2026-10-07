@@ -1,20 +1,20 @@
 # Tuần 4 – Smoke test với Pytest và Selenium
 
-
-**Mã SV:** A52197  
- 
+**Sinh viên thực hiện:** Nguyễn Bảo Phúc  
+**Mã SV:** A51738  
+**Lớp / Nhóm:** Kiểm thử phần mềm (N07)  
 
 ---
 
 ## 1. Giới thiệu
-Bài kiểm thử Smoke Test sử dụng Selenium và Pytest để tự động kiểm tra tính sẵn sàng của trang web mục tiêu **The Internet**.
+Bài kiểm tra Smoke Test sử dụng Selenium và Pytest để tự động kiểm tra tính khả dụng của mục tiêu trang web The Internet.
 
 ## 2. Yêu cầu
 - Python 3 và pip.
 - Trình duyệt Google Chrome (phiên bản mới nhất).
 
 ## 3. Cách cài đặt Pytest và Selenium
-*Lưu ý: Phải kích hoạt môi trường ảo trước khi cài thư viện hoặc chạy pytest.*
+*Lưu ý: Phải kích hoạt môi trường ảo trước khi cài đặt thư viện hoặc chạy pytest.*
 
 – **Tạo và kích hoạt môi trường ảo:**
 ```powershell
