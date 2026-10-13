@@ -1,57 +1,94 @@
-import pytest
+import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By # Thư viện chứa các phương thức tìm kiếm phần tử (ID, NAME, CSS_SELECTOR...)
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
-def test_valid_login():
-    # Khởi tạo trình duyệt Chrome
-    driver = webdriver.Chrome()
-    # Mở URL của trang đăng nhập
-    driver.get("https://the-internet.herokuapp.com/login")
+def setup_driver():
+    """Khởi tạo WebDriver cho Chrome"""
+    options = webdriver.ChromeOptions()
+    # Thêm options nếu muốn chạy ẩn (headless): options.add_argument("--headless")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    driver.maximize_window()
+    return driver
 
-    # Tìm ô Username qua thuộc tính ID="username" và nhập chữ "tomsmith". Tương tự với Password
-    driver.find_element(By.ID, "username").send_keys("tomsmith") # ĐÚNG
-    driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!") # ĐÚNG
-    # Tìm nút "Login" bằng CSS Selector (nút có thuộc tính type='submit') và click vào nó
-    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
+def test_login_success():
+    """Trường hợp 1: Đăng nhập thành công"""
+    driver = setup_driver()
+    try:
+        # Bước 1: Mở trang đăng nhập
+        driver.get("https://the-internet.herokuapp.com/login")
+        
+        # Bước 2 & 3: Nhập username và password hợp lệ
+        driver.find_element(By.ID, "username").send_keys("tomsmith")
+        driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+        
+        # Bước 4: Nhấn nút Login
+        driver.find_element(By.CSS_SELECTOR, "button.radius").click()
+        
+        # Kiểm tra kết quả mong đợi
+        time.sleep(2) # Chờ chuyển trang
+        current_url = driver.current_url
+        flash_message = driver.find_element(By.ID, "flash").text
+        
+        assert "secure" in current_url, "Lỗi: Không chuyển đến trang Secure Area!"
+        assert "You logged into a secure area!" in flash_message, "Lỗi: Thông báo thành công không hiển thị chính xác!"
+        print("-> Trường hợp 1 [Đăng nhập thành công]: PASSED")
+        
+    finally:
+        driver.quit()
 
-    # Lấy phần tử chứa thông báo (có ID là "flash") sau khi bấm đăng nhập
-    element = driver.find_element(By.ID, "flash")
-    # Đảm bảo rằng phần tử thông báo này thực sự xuất hiện trên giao diện
-    assert element is not None
-    # Kiểm tra xem dòng text trong thông báo có chứa câu thành công hay không
-    assert "You logged into a secure area!" in element.text
+def test_login_wrong_password():
+    """Trường hợp 2: Đăng nhập với mật khẩu sai"""
+    driver = setup_driver()
+    try:
+        # Bước 1: Mở trang đăng nhập
+        driver.get("https://the-internet.herokuapp.com/login")
+        
+        # Bước 2 & 3: Nhập username đúng, password sai
+        driver.find_element(By.ID, "username").send_keys("tomsmith")
+        driver.find_element(By.ID, "password").send_keys("WrongPassword")
+        
+        # Bước 4: Nhấn nút Login
+        driver.find_element(By.CSS_SELECTOR, "button.radius").click()
+        
+        # Kiểm tra kết quả mong đợi
+        time.sleep(2)
+        flash_message = driver.find_element(By.ID, "flash").text
+        
+        assert "Your password is invalid!" in flash_message, "Lỗi: Thông báo sai mật khẩu không hiển thị chính xác!"
+        print("-> Trường hợp 2 [Đăng nhập mật khẩu sai]: PASSED")
+        
+    finally:
+        driver.quit()
 
-    # Đóng trình duyệt sau khi test xong
-    driver.quit()
+def test_login_wrong_username():
+    """Trường hợp 3: Đăng nhập với tên đăng nhập sai"""
+    driver = setup_driver()
+    try:
+        # Bước 1: Mở trang đăng nhập
+        driver.get("https://the-internet.herokuapp.com/login")
+        
+        # Bước 2 & 3: Nhập username sai, password đúng
+        driver.find_element(By.ID, "username").send_keys("wronguser")
+        driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!")
+        
+        # Bước 4: Nhấn nút Login
+        driver.find_element(By.CSS_SELECTOR, "button.radius").click()
+        
+        # Kiểm tra kết quả mong đợi
+        time.sleep(2)
+        flash_message = driver.find_element(By.ID, "flash").text
+        
+        assert "Your username is invalid!" in flash_message, "Lỗi: Thông báo sai username không hiển thị chính xác!"
+        print("-> Trường hợp 3 [Đăng nhập tên đăng nhập sai]: PASSED")
+        
+    finally:
+        driver.quit()
 
-def test_invalid_password():
-    driver = webdriver.Chrome()
-    driver.get("https://the-internet.herokuapp.com/login")
-
-    # Nhập Username ĐÚNG, Password SAI
-    driver.find_element(By.ID, "username").send_keys("tomsmith") # ĐÚNG
-    driver.find_element(By.ID, "password").send_keys("wrongpassword") # SAI
-    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
-    
-    element = driver.find_element(By.ID, "flash")
-    assert element is not None
-    # Xác nhận nội dung lỗi chính xác là sai mật khẩu
-    assert "Your password is invalid!" in element.text
-    
-    driver.quit()
-
-def test_invalid_username():
-    driver = webdriver.Chrome()
-    driver.get("https://the-internet.herokuapp.com/login")
-
-    # Nhập Username SAI, Password ĐÚNG
-    driver.find_element(By.ID, "username").send_keys("wrongusername") # SAI
-    driver.find_element(By.ID, "password").send_keys("SuperSecretPassword!") # ĐÚNG
-    driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
-    
-    element = driver.find_element(By.ID, "flash")
-    assert element is not None
-    # Xác nhận nội dung lỗi chính xác là sai tên đăng nhập
-    assert "Your username is invalid!" in element.text
-    
-    driver.quit()
+if __name__ == "__main__":
+    print("Bắt đầu chạy các test case đăng nhập...")
+    test_login_success()
+    test_login_wrong_password()
+    test_login_wrong_username()
+    print("Hoàn thành tất cả các bài kiểm thử!")
