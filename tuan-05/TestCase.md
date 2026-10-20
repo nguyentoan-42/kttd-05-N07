@@ -1,31 +1,64 @@
 # Test chức năng Đăng nhập
 
-## 1. TC-01: Đăng nhập thành công với tài khoản hợp lệ
-- Các bước thực hiện:
-  + Truy cập trang đăng nhập
-  + Nhập Username ĐÚNG, Password ĐÚNG vào ô các tương ứng
-  + Nhấn nút "Login"
-- Dữ liệu đầu vào:
-  + Username: tomsmith
-  + Password: SuperSecretPassword!
-- Kết quả mong đợi: "You logged into a secure area!"
+## 1. TC-1: Đăng nhập thất bại do bỏ trống cả Username và Password
+Các bước thực hiện:
 
-## 2. TC-02: Đăng nhập thất bại do sai mật khẩu
-- Các bước thực hiện:
-  + Truy cập trang đăng nhập
-  + Nhập Username ĐÚNG, Password SAI vào ô các tương ứng
-  + Nhấn nút "Login"
-- Dữ liệu đầu vào:
-  + Username: tomsmith
-  + Password: wrongpassword
-- Kết quả mong đợi: "Your password is invalid!"
+Truy cập trang đăng nhập
 
-## 3. Đăng nhập thất bại do sai tên đăng nhập
-- Các bước thực hiện:
-  + Truy cập trang đăng nhập
-  + Nhập Username SAI, Password ĐÚNG vào ô các tương ứng
-  + Nhấn nút "Login"
-- Dữ liệu đầu vào:
-  + Username: wrongusername
-  + Password: SuperSecretPassword!
-- Kết quả mong đợi: "Your username is invalid!"
+Để trống ô Username và ô Password
+
+Nhấn nút "Login"
+
+Dữ liệu đầu vào:
+
+Username: (bỏ trống)
+
+Password: (bỏ trống)
+
+Kết quả mong đợi: Hệ thống hiển thị thông báo lỗi yêu cầu nhập thông tin (hoặc thông báo Your username is invalid!).
+
+## 2. TC-2: Đăng nhập thất bại do bỏ trống ô Username
+Các bước thực hiện:
+
+Truy cập trang đăng nhập
+
+Để trống ô Username, nhập Password ĐÚNG
+
+Nhấn nút "Login"
+
+Dữ liệu đầu vào:
+
+Username: (bỏ trống)
+
+Password: SuperSecretPassword!
+
+Kết quả mong đợi: Hiển thị thông báo lỗi Your username is invalid!.
+
+## 3. Đăng nhập thất bại do bỏ trống ô Password
+Các bước thực hiện:
+
+Truy cập trang đăng nhập
+
+Nhập Username ĐÚNG, để trống ô Password
+
+Nhấn nút "Login"
+
+Dữ liệu đầu vào:
+
+Username: tomsmith
+
+Password: (bỏ trống)
+
+Kết quả mong đợi: Hiển thị thông báo lỗi Your password is invalid!.
+  ## 3. Kiểm tra tính bảo mật của mật khẩu (Masking Password)
+Các bước thực hiện:
+
+Truy cập trang đăng nhập
+
+Nhập ký tự vào ô Password
+
+Dữ liệu đầu vào:
+
+Password: SuperSecretPassword!
+
+Kết quả mong đợi: Ký tự nhập vào ô Password phải được ẩn đi dưới dạng dấu chấm tròn (•) hoặc dấu hoa thị (*), không hiển thị dạng văn bản thuần túy (plain text).
