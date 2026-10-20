@@ -34,7 +34,7 @@ Password: SuperSecretPassword!
 
 Kết quả mong đợi: Hiển thị thông báo lỗi Your username is invalid!.
 
-## 3. Đăng nhập thất bại do bỏ trống ô Password
+## 3.TC-3 Đăng nhập thất bại do bỏ trống ô Password
 Các bước thực hiện:
 
 Truy cập trang đăng nhập
@@ -50,7 +50,7 @@ Username: tomsmith
 Password: (bỏ trống)
 
 Kết quả mong đợi: Hiển thị thông báo lỗi Your password is invalid!.
-  ## 3. Kiểm tra tính bảo mật của mật khẩu (Masking Password)
+  ## 4. TC4 . Kiểm tra tính bảo mật của mật khẩu (Masking Password)
 Các bước thực hiện:
 
 Truy cập trang đăng nhập
