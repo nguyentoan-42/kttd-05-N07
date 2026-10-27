@@ -135,4 +135,3 @@ def test_remote_webdriver():
         driver.quit()
     except Exception:
         print("Bỏ qua bài test này vì không có Selenium Server port 4444")
-        pass
